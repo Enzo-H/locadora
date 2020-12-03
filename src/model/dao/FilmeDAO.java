@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List; 
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -22,7 +22,6 @@ public class FilmeDAO {
 			stmt = con
 					.prepareStatement("INSERT INTO FILME (titulo, categoria, sinopse, tempo, imagem3d, dublado) VALUES"
 							+ "(?,?,?,?,?,?)");
-			
 			stmt.setString(1, f.getTitulo());
 			stmt.setString(2, f.getCategoria());
 			stmt.setString(3, f.getSinopse());
@@ -38,6 +37,7 @@ public class FilmeDAO {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
 	}
+
 	public List<Filme> read() {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
@@ -66,4 +66,5 @@ public class FilmeDAO {
 		}
 		return filmes;
 	}
+
 }
