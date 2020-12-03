@@ -97,6 +97,7 @@ public class JFCadastrarCliente extends JFrame {
 		sexo.add(rdbtnFeminino);
 		sexo.add(rdbtnMasculino);
 		
+		
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnLimpar.setBounds(244, 210, 89, 30);

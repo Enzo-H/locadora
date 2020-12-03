@@ -85,6 +85,7 @@ public class JFListarClientes extends JFrame {
 		readJTable();
 	}
 	
+	
 	public void readJTable() {
 		DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
 		modelo.setNumRows(0);

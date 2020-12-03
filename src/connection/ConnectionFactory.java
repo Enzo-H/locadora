@@ -56,7 +56,7 @@ public class ConnectionFactory {
 				throw new RuntimeException("Erro ao encerrar a conexão: ", e);
 			}
 		}
-				
 		
 	}
+
 }
