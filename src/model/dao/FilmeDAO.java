@@ -10,45 +10,45 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
-import model.bean.Filme;
+import model.bean.filme;
 
-public class FilmeDAO {
-
-	public void create(Filme f) {
+public class filmeDAO {
+	
+	public void create(filme f) {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
-
+		
 		try {
-			stmt = con
-					.prepareStatement("INSERT INTO FILME (titulo, categoria, sinopse, tempo, imagem3d, dublado) VALUES"
-							+ "(?,?,?,?,?,?)");
+			stmt = con.prepareStatement("INSERT INTO FILME (titulo, categoria, sinopse, tempo, imagem3d, dublado) VALUES"
+					+ "(?,?,?,?,?,?)");
 			stmt.setString(1, f.getTitulo());
 			stmt.setString(2, f.getCategoria());
 			stmt.setString(3, f.getSinopse());
 			stmt.setInt(4, f.getTempo());
 			stmt.setBoolean(5, f.isImagem3d());
 			stmt.setBoolean(6, f.isDublado());
-
+			
 			stmt.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Filme Salvo com sucesso!");
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro ao salvar: " + e);
-		} finally {
+		} catch(SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro ao salvar: "+ e);
+		}finally{
 			ConnectionFactory.closeConnection(con, stmt);
 		}
+		
 	}
-
-	public List<Filme> read() {
+	
+	public List<filme> read(){
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		List<Filme> filmes = new ArrayList<>();
-
+		List<filme> filmes = new ArrayList<>();
+		
 		try {
 			stmt = con.prepareStatement("SELECT * FROM filme;");
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				Filme f = new Filme();
+				filme f = new filme();
 				f.setIdFilme(rs.getInt("idFilme"));
 				f.setTitulo(rs.getString("titulo"));
 				f.setTempo(rs.getInt("tempo"));
