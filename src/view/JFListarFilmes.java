@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -10,12 +10,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import model.bean.filme;
-import model.dao.filmeDAO;
+import model.bean.Filme;
+import model.dao.FilmeDAO;
 
 import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-public class JFlistarFilmes extends JFrame {
+public class JFListarFilmes extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tblFilmes;
@@ -27,7 +30,7 @@ public class JFlistarFilmes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFlistarFilmes frame = new JFlistarFilmes();
+					JFListarFilmes frame = new JFListarFilmes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,8 +42,8 @@ public class JFlistarFilmes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JFlistarFilmes() {
-		setTitle("Listar filmes");
+	public JFListarFilmes() {
+		setTitle("Listar Filmes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 691, 421);
 		contentPane = new JPanel();
@@ -62,16 +65,19 @@ public class JFlistarFilmes extends JFrame {
 		));
 		scrollPane.setViewportView(tblFilmes);
 		
-		JButton btnCadastrar = new JButton("Cadastrar filme");
-		btnCadastrar.setBounds(10, 330, 139, 23);
+		JButton btnCadastrar = new JButton("Cadastrar Filme");
+		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCadastrar.setBounds(10, 330, 139, 30);
 		contentPane.add(btnCadastrar);
 		
-		JButton btnAlterar = new JButton("Alterar filme");
-		btnAlterar.setBounds(268, 330, 111, 23);
+		JButton btnAlterar = new JButton("Alterar Filme");
+		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAlterar.setBounds(175, 330, 111, 30);
 		contentPane.add(btnAlterar);
 		
-		JButton btnExcluir = new JButton("Excluir filme");
-		btnExcluir.setBounds(526, 330, 139, 23);
+		JButton btnExcluir = new JButton("Excluir Filme");
+		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnExcluir.setBounds(296, 330, 111, 30);
 		contentPane.add(btnExcluir);
 		
 		readJTable();
@@ -80,8 +86,8 @@ public class JFlistarFilmes extends JFrame {
 	public void readJTable() {
 		DefaultTableModel modelo = (DefaultTableModel) tblFilmes.getModel();
 		modelo.setNumRows(0);
-		filmeDAO fdao = new filmeDAO();
-		for(filme f : fdao.read()) {
+		FilmeDAO fdao = new FilmeDAO();
+		for(Filme f : fdao.read()) {
 			modelo.addRow(new Object[] {
 					f.getIdFilme(),
 					f.getTitulo(),

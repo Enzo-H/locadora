@@ -10,11 +10,11 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
-import model.bean.filme;
+import model.bean.Filme;
 
-public class filmeDAO {
+public class FilmeDAO {
 	
-	public void create(filme f) {
+	public void create(Filme f) {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		
@@ -38,17 +38,17 @@ public class filmeDAO {
 		
 	}
 	
-	public List<filme> read(){
+	public List<Filme> read(){
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		List<filme> filmes = new ArrayList<>();
+		List<Filme> filmes = new ArrayList<>();
 		
 		try {
 			stmt = con.prepareStatement("SELECT * FROM filme;");
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				filme f = new filme();
+				Filme f = new Filme();
 				f.setIdFilme(rs.getInt("idFilme"));
 				f.setTitulo(rs.getString("titulo"));
 				f.setTempo(rs.getInt("tempo"));

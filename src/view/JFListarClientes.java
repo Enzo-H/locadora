@@ -10,14 +10,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import model.bean.cliente;
-import model.bean.filme;
-import model.dao.clienteDAO;
-import model.dao.filmeDAO;
+import model.bean.Cliente;
+import model.bean.Filme;
+import model.dao.ClienteDAO;
+import model.dao.FilmeDAO;
 
 import javax.swing.JButton;
 
-public class JFlistarCliente extends JFrame {
+public class JFListarClientes extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tblClientes;
@@ -31,7 +31,7 @@ public class JFlistarCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFlistarCliente frame = new JFlistarCliente();
+					JFListarClientes frame = new JFListarClientes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +43,7 @@ public class JFlistarCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JFlistarCliente() {
+	public JFListarClientes() {
 		setTitle("Listar Clientes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 670, 424);
@@ -61,7 +61,7 @@ public class JFlistarCliente extends JFrame {
 			new Object[][] {
 			},
 			new String[] {
-				"idCliente", "Nome", "CPF", "Endere\u00E7o", "Estado  Civil"
+				"idCliente", "Nome", "Email", "Sexo"
 			}
 		));
 		scrollPane.setViewportView(tblClientes);
@@ -84,14 +84,13 @@ public class JFlistarCliente extends JFrame {
 	public void readJTable() {
 		DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
 		modelo.setNumRows(0);
-		clienteDAO fdao = new clienteDAO();
-		for(cliente f : fdao.read()) {
+		ClienteDAO fdao = new ClienteDAO();
+		for(Cliente f : fdao.read()) {
 			modelo.addRow(new Object[] {
 					f.getIdCliente(),
 					f.getNome(),
-					f.getCPF(),
-					f.getEndereco(),
-					f.getEstadoCivil()
+					f.getEmail(),
+					f.isSexo(),
 			});
 		}
 		

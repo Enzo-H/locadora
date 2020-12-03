@@ -11,21 +11,20 @@ import javax.swing.JOptionPane;
 
 import connection.ConnectionFactory;
 import model.bean.Cliente;
-import model.bean.cliente;
 
-public class clienteDAO {
+public class ClienteDAO {
 
-	public void create(cliente f) {
+	public void create(Cliente f) {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		
 		try {
 			stmt = con.prepareStatement("INSERT INTO CLIENTE (nome, cpf, endereço, EstadoCivil) VALUES"
-					+ "(?,?,?,?)");
+					+ "(?,?,?)");
 			stmt.setString(1, f.getNome());
-			stmt.setInt(2, f.getCPF());
-			stmt.setString(3, f.getEndereco());
-			stmt.setString(4, f.getEstadoCivil());
+			stmt.setString(2, f.getEmail());
+			stmt.setBoolean(3, f.isSexo());
+
 			
 			stmt.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Cliente Salvo com sucesso!");
@@ -35,17 +34,17 @@ public class clienteDAO {
 			ConnectionFactory.closeConnection(con, stmt);
 		}
 	}
-	public List<cliente> read(){
+	public List<Cliente> read(){
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
-		List<cliente> clientes = new ArrayList<>();
+		List<Cliente> clientes = new ArrayList<>();
 		
 		try {
 			stmt = con.prepareStatement("SELECT * FROM cliente;");
 			rs = stmt.executeQuery();
 			while (rs.next()) {
-				Cliente f = new cliente();
+				Cliente f = new Cliente();
 				f.setIdCliente(rs.getInt("idCliente"));
 				f.setNome(rs.getString("nome"));
 				f.setEmail(rs.getString("email"));
