@@ -22,7 +22,6 @@ public class JFListarFilmes extends JFrame {
 
 	private JPanel contentPane;
 	private JTable tblFilmes;
-
 	/**
 	 * Launch the application.
 	 */

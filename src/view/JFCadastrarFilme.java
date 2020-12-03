@@ -127,7 +127,6 @@ public class JFCadastrarFilme extends JFrame {
 		lblNewLabel_6.setBounds(380, 357, 46, 14);
 		contentPane.add(lblNewLabel_6);
 		
-		
 		JRadioButton rdbtnDublado = new JRadioButton("Dublado");
 		rdbtnDublado.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		rdbtnDublado.setBounds(320, 384, 79, 23);

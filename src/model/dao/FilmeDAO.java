@@ -18,7 +18,6 @@ public class FilmeDAO {
 		Connection con = ConnectionFactory.getConnection();
 		PreparedStatement stmt = null;
 		
-		
 		try {
 			stmt = con.prepareStatement("INSERT INTO FILME (titulo, categoria, sinopse, tempo, imagem3d, dublado) VALUES"
 					+ "(?,?,?,?,?,?)");
