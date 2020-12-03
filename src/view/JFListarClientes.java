@@ -16,6 +16,7 @@ import model.dao.ClienteDAO;
 import model.dao.FilmeDAO;
 
 import javax.swing.JButton;
+import java.awt.Font;
 
 public class JFListarClientes extends JFrame {
 
@@ -67,15 +68,18 @@ public class JFListarClientes extends JFrame {
 		scrollPane.setViewportView(tblClientes);
 		
 		JButton btnCadastrar = new JButton("Cadastrar Cliente");
-		btnCadastrar.setBounds(10, 351, 150, 23);
+		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCadastrar.setBounds(10, 343, 150, 31);
 		contentPane.add(btnCadastrar);
 		
-		btnAlterar = new JButton("Alterar cliente");
-		btnAlterar.setBounds(277, 351, 123, 23);
+		btnAlterar = new JButton("Alterar Cliente");
+		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnAlterar.setBounds(181, 343, 123, 31);
 		contentPane.add(btnAlterar);
 		
-		btnExcluir = new JButton("Excluir cliente");
-		btnExcluir.setBounds(494, 351, 150, 23);
+		btnExcluir = new JButton("Excluir Cliente");
+		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnExcluir.setBounds(321, 343, 123, 31);
 		contentPane.add(btnExcluir);
 		
 		readJTable();
