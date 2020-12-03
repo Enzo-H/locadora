@@ -6,21 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import model.bean.Filme;
-import model.dao.FilmeDAO;
+import model.bean.filme;
+import model.dao.filmeDAO;
 
 import javax.swing.JButton;
 
-public class JFListarFilmes extends JFrame {
+public class JFlistarFilmes extends JFrame {
 
 	private JPanel contentPane;
-	private JTable jtFilme;
+	private JTable tblFilmes;
 
 	/**
 	 * Launch the application.
@@ -29,7 +27,7 @@ public class JFListarFilmes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JFListarFilmes frame = new JFListarFilmes();
+					JFlistarFilmes frame = new JFlistarFilmes();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,56 +39,49 @@ public class JFListarFilmes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public JFListarFilmes() {
-		setTitle("Listar Filmes");
+	public JFlistarFilmes() {
+		setTitle("Listar filmes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 803, 525);
+		setBounds(100, 100, 691, 421);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Listar Filmes");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblNewLabel.setBounds(10, 11, 188, 38);
-		contentPane.add(lblNewLabel);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(20, 60, 723, 332);
+		scrollPane.setBounds(10, 11, 655, 284);
 		contentPane.add(scrollPane);
 		
-		jtFilme = new JTable();
-		jtFilme.setModel(new DefaultTableModel(
+		tblFilmes = new JTable();
+		tblFilmes.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
 			},
 			new String[] {
 				"idFilme", "T\u00EDtulo", "Categoria", "Tempo"
 			}
 		));
-		scrollPane.setViewportView(jtFilme);
+		scrollPane.setViewportView(tblFilmes);
 		
-		JButton btnCadastrar = new JButton("Cadastrar Filme");
-		btnCadastrar.setBounds(20, 434, 125, 23);
+		JButton btnCadastrar = new JButton("Cadastrar filme");
+		btnCadastrar.setBounds(10, 330, 139, 23);
 		contentPane.add(btnCadastrar);
 		
-		JButton btnAlterar = new JButton("Alterar Filme");
-		btnAlterar.setBounds(176, 434, 111, 23);
+		JButton btnAlterar = new JButton("Alterar filme");
+		btnAlterar.setBounds(268, 330, 111, 23);
 		contentPane.add(btnAlterar);
 		
-		JButton btnExcluir = new JButton("Excluir Filme");
-		btnExcluir.setBounds(321, 434, 117, 23);
+		JButton btnExcluir = new JButton("Excluir filme");
+		btnExcluir.setBounds(526, 330, 139, 23);
 		contentPane.add(btnExcluir);
 		
 		readJTable();
 	}
 	
 	public void readJTable() {
-		DefaultTableModel modelo = (DefaultTableModel) jtFilme.getModel();
+		DefaultTableModel modelo = (DefaultTableModel) tblFilmes.getModel();
 		modelo.setNumRows(0);
-		FilmeDAO fdao = new FilmeDAO();
-		for(Filme f : fdao.read()) {
+		filmeDAO fdao = new filmeDAO();
+		for(filme f : fdao.read()) {
 			modelo.addRow(new Object[] {
 					f.getIdFilme(),
 					f.getTitulo(),
@@ -100,6 +91,4 @@ public class JFListarFilmes extends JFrame {
 		}
 		
 	}
-	
-	
 }
