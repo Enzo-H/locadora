@@ -16,6 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JSpinner;
@@ -166,7 +167,7 @@ public class JFCadastrarFilme extends JFrame {
 
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnLimpar.setBounds(285, 439, 101, 38);
+		btnLimpar.setBounds(286, 440, 101, 38);
 		contentPane.add(btnLimpar);
 
 		JButton btnCancelar = new JButton("Cancelar");
