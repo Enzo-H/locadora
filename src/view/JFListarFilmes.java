@@ -4,6 +4,7 @@ package view;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
@@ -21,7 +22,7 @@ import java.awt.event.ActionEvent;
 public class JFListarFilmes extends JFrame {
 
 	private JPanel contentPane;
-	private JTable tblFilmes;
+	private JTable jtFilme;
 	/**
 	 * Launch the application.
 	 */
@@ -55,15 +56,15 @@ public class JFListarFilmes extends JFrame {
 		scrollPane.setBounds(10, 11, 655, 284);
 		contentPane.add(scrollPane);
 		
-		tblFilmes = new JTable();
-		tblFilmes.setModel(new DefaultTableModel(
+		jtFilme = new JTable();
+		jtFilme.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"idFilme", "T\u00EDtulo", "Categoria", "Tempo"
 			}
 		));
-		scrollPane.setViewportView(tblFilmes);
+		scrollPane.setViewportView(jtFilme);
 		
 		JButton btnCadastrar = new JButton("Cadastrar Filme");
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -71,6 +72,21 @@ public class JFListarFilmes extends JFrame {
 		contentPane.add(btnCadastrar);
 		
 		JButton btnAlterar = new JButton("Alterar Filme");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//verificar se há linha selecionada
+				if(jtFilme.getSelectedRow() != -1) {
+					JFAtualizarFilme af = new JFAtualizarFilme(
+							(int)jtFilme.getValueAt(jtFilme.getSelectedRow(), 0));				
+					af.setVisible(true);
+				} else {
+					JOptionPane.showMessageDialog(null, "Selecione um filme");	
+				}
+				
+				readJTable();
+				
+			}
+		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAlterar.setBounds(175, 330, 111, 30);
 		contentPane.add(btnAlterar);
@@ -84,7 +100,7 @@ public class JFListarFilmes extends JFrame {
 	}
 	
 	public void readJTable() {
-		DefaultTableModel modelo = (DefaultTableModel) tblFilmes.getModel();
+		DefaultTableModel modelo = (DefaultTableModel) jtFilme.getModel();
 		modelo.setNumRows(0);
 		FilmeDAO fdao = new FilmeDAO();
 		for(Filme f : fdao.read()) {

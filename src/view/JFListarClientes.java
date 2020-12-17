@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -17,11 +18,13 @@ import model.dao.FilmeDAO;
 
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JFListarClientes extends JFrame {
 
 	private JPanel contentPane;
-	private JTable tblClientes;
+	private JTable jtCliente;
 	private JButton btnAlterar;
 	private JButton btnExcluir;
 
@@ -57,24 +60,37 @@ public class JFListarClientes extends JFrame {
 		scrollPane.setBounds(10, 11, 634, 300);
 		contentPane.add(scrollPane);
 		
-		tblClientes = new JTable();
-		tblClientes.setModel(new DefaultTableModel(
+		jtCliente = new JTable();
+		jtCliente.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"idCliente", "Nome", "Email", "Sexo"
 			}
 		));
-		scrollPane.setViewportView(tblClientes);
+		scrollPane.setViewportView(jtCliente);
 		
 		JButton btnCadastrar = new JButton("Cadastrar Cliente");
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCadastrar.setBounds(10, 343, 150, 31);
 		contentPane.add(btnCadastrar);
 		
-		btnAlterar = new JButton("Alterar Cliente");
+		JButton btnAlterar = new JButton("Alterar Cliente");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				//verificar se há linha selecionada
+				if(jtCliente.getSelectedRow()!= -1) {
+					JFAtualizarCliente af = new JFAtualizarCliente(
+							(int)jtCliente.getValueAt(jtCliente.getSelectedRow(), 0));
+					af.setVisible(true);
+				}else {
+					JOptionPane.showMessageDialog(null, "Selecione um cliente");
+				}
+				readJTable();
+			}
+		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAlterar.setBounds(181, 343, 123, 31);
+		btnAlterar.setBounds(170, 343, 141, 31);
 		contentPane.add(btnAlterar);
 		
 		btnExcluir = new JButton("Excluir Cliente");
@@ -86,15 +102,15 @@ public class JFListarClientes extends JFrame {
 	}
 	
 	public void readJTable() {
-		DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+		DefaultTableModel modelo = (DefaultTableModel) jtCliente.getModel();
 		modelo.setNumRows(0);
-		ClienteDAO fdao = new ClienteDAO();
-		for(Cliente f : fdao.read()) {
+		ClienteDAO cdao = new ClienteDAO();
+		for(Cliente c : cdao.read()) {
 			modelo.addRow(new Object[] {
-					f.getIdCliente(),
-					f.getNome(),
-					f.getEmail(),
-					f.isSexo(),
+					c.getIdCliente(),
+					c.getNome(),
+					c.getEmail(),
+					c.isSexo(),
 			});
 		}
 		
