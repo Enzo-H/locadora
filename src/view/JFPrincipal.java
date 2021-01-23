@@ -122,9 +122,21 @@ public class JFPrincipal extends JFrame {
 		popupMenu.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Cadastrar Cliente...");
+		mntmNewMenuItem_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFCadastrarCliente cc = new JFCadastrarCliente();
+				cc.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Listar Clientes...");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFListarClientes lc = new JFListarClientes();
+				lc.setVisible(true);
+			}
+		});
 		mnNewMenu.add(mntmNewMenuItem_7);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);

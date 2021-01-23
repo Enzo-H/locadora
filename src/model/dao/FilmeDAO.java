@@ -27,7 +27,6 @@ public class FilmeDAO {
 			stmt.setInt(4, f.getTempo());
 			stmt.setBoolean(5, f.isImagem3d());
 			stmt.setBoolean(6, f.isDublado());
-			
 			stmt.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Filme Salvo com sucesso!");
 		} catch(SQLException e) {
@@ -57,6 +56,7 @@ public class FilmeDAO {
 				f.setImagem3d(rs.getBoolean("imagem3d"));
 				f.setDublado(rs.getBoolean("dublado"));
 				filmes.add(f);
+				
 			}
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro ao buscar as informações do BD: " + e);

@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowFocusListener;
+import java.awt.event.WindowEvent;
 
 public class JFListarFilmes extends JFrame {
 
@@ -44,8 +46,16 @@ public class JFListarFilmes extends JFrame {
 	 */
 	
 	public JFListarFilmes() {
+		addWindowFocusListener(new WindowFocusListener() {
+			public void windowGainedFocus(WindowEvent arg0) {
+				readJTable();
+			}
+			public void windowLostFocus(WindowEvent e) {
+
+			}
+		});
 		setTitle("Listar Filmes");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 691, 421);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -53,7 +63,7 @@ public class JFListarFilmes extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 655, 284);
+		scrollPane.setBounds(10, 11, 655, 303);
 		contentPane.add(scrollPane);
 		
 		jtFilme = new JTable();
@@ -67,6 +77,13 @@ public class JFListarFilmes extends JFrame {
 		scrollPane.setViewportView(jtFilme);
 		
 		JButton btnCadastrar = new JButton("Cadastrar Filme");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFCadastrarFilme cf = new JFCadastrarFilme();
+				cf.setVisible(true);
+				readJTable();
+			}
+		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCadastrar.setBounds(10, 330, 139, 30);
 		contentPane.add(btnCadastrar);
@@ -76,8 +93,7 @@ public class JFListarFilmes extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				//verificar se há linha selecionada
 				if(jtFilme.getSelectedRow() != -1) {
-					JFAtualizarFilme af = new JFAtualizarFilme(
-							(int)jtFilme.getValueAt(jtFilme.getSelectedRow(), 0));				
+					JFAtualizarFilme af = new JFAtualizarFilme((int)jtFilme.getValueAt(jtFilme.getSelectedRow(), 0));				
 					af.setVisible(true);
 				} else {
 					JOptionPane.showMessageDialog(null, "Selecione um filme");	
@@ -88,7 +104,7 @@ public class JFListarFilmes extends JFrame {
 			}
 		});
 		btnAlterar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAlterar.setBounds(175, 330, 111, 30);
+		btnAlterar.setBounds(159, 330, 111, 30);
 		contentPane.add(btnAlterar);
 		
 		JButton btnExcluir = new JButton("Excluir Filme");
@@ -111,8 +127,18 @@ public class JFListarFilmes extends JFrame {
 			}
 		});
 		btnExcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnExcluir.setBounds(296, 330, 111, 30);
+		btnExcluir.setBounds(280, 330, 111, 30);
 		contentPane.add(btnExcluir);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCancelar.setBounds(561, 330, 104, 30);
+		contentPane.add(btnCancelar);
 		
 		readJTable();
 	}
